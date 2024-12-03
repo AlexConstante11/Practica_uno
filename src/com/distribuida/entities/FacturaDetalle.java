@@ -64,9 +64,12 @@ public class FacturaDetalle {
         this.libro = libro;
     }
 
-    @Override
-    public String toString() {
-        return "FacturaDetalle [idFacturaDetalle=" + idFacturaDetalle + ", cantidad=" + cantidad + ", subtotal=" 
-                + subtotal + ", factura=" + factura.getNumFactura() + ", libro=" + libro.getTitulo() + "]";
+	@Override
+	public String toString() {
+		return "FacturaDetalle [idFacturaDetalle=" + idFacturaDetalle + ", cantidad=" + cantidad + ", subtotal="
+				+ subtotal + ", factura=" + factura + ", libro=" + libro + "]";
+	}
+
+    
     }
 }

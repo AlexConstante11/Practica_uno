@@ -1,51 +1,58 @@
 package com.distribuida.entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "categoria")
 public class Categoria {
-	
-	private int idCategoria;
-	private String categoria;
-	private String descripcion;
-	
-	public Categoria() {}
 
-	public Categoria(int idCategoria, String categoria, String descripcion) {
-		this.idCategoria = idCategoria;
-		this.categoria = categoria;
-		this.descripcion = descripcion;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_categoria")
+    private int idCategoria;
 
-	public int getIdCategoria() {
-		return idCategoria;
-	}
+    @Column(name = "categoria")
+    private String categoria;
 
-	public void setIdCategoria(int idCategoria) {
-		this.idCategoria = idCategoria;
-	}
+    @Column(name = "descripcion")
+    private String descripcion;
 
-	public String getCategoria() {
-		return categoria;
-	}
+    public Categoria() {}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
+    public Categoria(int idCategoria, String categoria, String descripcion) {
+        this.idCategoria = idCategoria;
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public int getIdCategoria() {
+        return idCategoria;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
 
-	@Override
-	public String toString() {
-		return "Categoria [idCategoria=" + idCategoria + ", categoria=" + categoria + ", descripcion=" + descripcion
-				+ "]";
-	}
-	
-	
+    public String getCategoria() {
+        return categoria;
+    }
 
-	
-	
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Categoria [idCategoria=" + idCategoria + ", categoria=" + categoria + ", descripcion=" + descripcion
+                + "]";
+    }
 }
+
