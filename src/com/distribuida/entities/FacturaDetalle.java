@@ -1,29 +1,40 @@
 package com.distribuida.entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "factura_detalle")
 public class FacturaDetalle {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_factura_detalle")
     private int idFacturaDetalle;
+
+    @Column(name = "cantidad")
     private int cantidad;
+
+    @Column(name = "subtotal")
     private Double subtotal;
 
-    //
+    @ManyToOne
+    @JoinColumn(name = "id_factura")
     private Factura factura;
+
+    @ManyToOne
+    @JoinColumn(name = "id_libro")
     private Libro libro;
 
-    
     public FacturaDetalle() {}
 
     public FacturaDetalle(int idFacturaDetalle, int cantidad, Double subtotal, Factura factura, Libro libro) {
         this.idFacturaDetalle = idFacturaDetalle;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
-
-        //
         this.factura = factura;
         this.libro = libro;
     }
 
-    //
     public int getIdFacturaDetalle() {
         return idFacturaDetalle;
     }
@@ -64,12 +75,9 @@ public class FacturaDetalle {
         this.libro = libro;
     }
 
-	@Override
-	public String toString() {
-		return "FacturaDetalle [idFacturaDetalle=" + idFacturaDetalle + ", cantidad=" + cantidad + ", subtotal="
-				+ subtotal + ", factura=" + factura + ", libro=" + libro + "]";
-	}
-
-    
+    @Override
+    public String toString() {
+        return "FacturaDetalle [idFacturaDetalle=" + idFacturaDetalle + ", cantidad=" + cantidad + ", subtotal="
+                + subtotal + ", factura=" + factura.getIdFactura() + ", libro=" + libro.getTitulo() + "]";
     }
 }

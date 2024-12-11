@@ -1,54 +1,57 @@
 package com.distribuida.dao;
 
 import java.util.List;
+
 import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.distribuida.entities.Cliente;
+
+import com.distribuida.entities.Libro;
 
 @Repository
-@Transactional
-public class ClienteDAOImpl implements ClienteDAO {
+public class LibroDAOImpl implements LibroDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Cliente> findAll() {
+    @Transactional
+    public List<Libro> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Cliente", Cliente.class).getResultList();
+        return session.createQuery("FROM Libro", Libro.class).getResultList();
     }
 
     @Override
     @Transactional
-    public Cliente findOne(int id) {
+    public Libro findOne(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Cliente.class, id);
-    }
-
-    @Override
-    public void add(Cliente cliente) {
-        Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(cliente);
+        return session.get(Libro.class, id);
     }
 
     @Override
     @Transactional
-    public void up(Cliente cliente) {
+    public void add(Libro libro) {
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(cliente);
+        session.saveOrUpdate(libro);
+    }
+
+    @Override
+    @Transactional
+    public void up(Libro libro) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(libro);
     }
 
     @Override
     @Transactional
     public void del(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Cliente cliente = session.get(Cliente.class, id);
-        if (cliente != null) {
-            session.delete(cliente);
+        Libro libro = findOne(id);
+        if (libro != null) {
+            session.delete(libro);
         }
     }
 }
-

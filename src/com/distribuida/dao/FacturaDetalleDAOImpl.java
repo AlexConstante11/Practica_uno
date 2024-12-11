@@ -1,54 +1,57 @@
 package com.distribuida.dao;
 
 import java.util.List;
+
 import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.distribuida.entities.Cliente;
+
+import com.distribuida.entities.FacturaDetalle;
 
 @Repository
-@Transactional
-public class ClienteDAOImpl implements ClienteDAO {
+public class FacturaDetalleDAOImpl implements FacturaDetalleDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Cliente> findAll() {
+    @Transactional
+    public List<FacturaDetalle> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Cliente", Cliente.class).getResultList();
+        return session.createQuery("FROM FacturaDetalle", FacturaDetalle.class).getResultList();
     }
 
     @Override
     @Transactional
-    public Cliente findOne(int id) {
+    public FacturaDetalle findOne(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Cliente.class, id);
-    }
-
-    @Override
-    public void add(Cliente cliente) {
-        Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(cliente);
+        return session.get(FacturaDetalle.class, id);
     }
 
     @Override
     @Transactional
-    public void up(Cliente cliente) {
+    public void add(FacturaDetalle facturaDetalle) {
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(cliente);
+        session.saveOrUpdate(facturaDetalle);
+    }
+
+    @Override
+    @Transactional
+    public void up(FacturaDetalle facturaDetalle) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(facturaDetalle);
     }
 
     @Override
     @Transactional
     public void del(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Cliente cliente = session.get(Cliente.class, id);
-        if (cliente != null) {
-            session.delete(cliente);
+        FacturaDetalle facturaDetalle = findOne(id);
+        if (facturaDetalle != null) {
+            session.delete(facturaDetalle);
         }
     }
 }
-

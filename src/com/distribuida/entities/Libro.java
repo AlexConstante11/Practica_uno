@@ -1,31 +1,66 @@
 package com.distribuida.entities;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "libro")
 public class Libro {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_libro")
     private int idLibro;
+
+    @Column(name = "titulo")
     private String titulo;
+
+    @Column(name = "editorial")
     private String editorial;
+
+    @Column(name = "num_paginas")
     private int numPaginas;
+
+    @Column(name = "edicion")
     private String edicion;
+
+    @Column(name = "idioma")
     private String idioma;
+
+    @Column(name = "fecha_publicacion")
     private Date fechaPublicacion;
+
+    @Column(name = "descripcion")
     private String descripcion;
+
+    @Column(name = "tipo_pasta")
     private String tipoPasta;
+
+    @Column(name = "isbn")
     private String isbn;
+
+    @Column(name = "num_ejemplares")
     private int numEjemplares;
+
+    @Column(name = "portada")
     private String portada;
+
+    @Column(name = "presentacion")
     private String presentacion;
+
+    @Column(name = "precio")
     private Double precio;
 
-    // 
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
     private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "id_autor")
     private Autor autor;
 
-    
     public Libro() {}
-    
+
     public Libro(int idLibro, String titulo, String editorial, int numPaginas, String edicion, String idioma,
                  Date fechaPublicacion, String descripcion, String tipoPasta, String isbn, int numEjemplares,
                  String portada, String presentacion, Double precio, Categoria categoria, Autor autor) {
@@ -43,12 +78,12 @@ public class Libro {
         this.portada = portada;
         this.presentacion = presentacion;
         this.precio = precio;
-
         this.categoria = categoria;
         this.autor = autor;
     }
 
-    //
+    // Getters and Setters
+
     public int getIdLibro() {
         return idLibro;
     }
@@ -178,11 +213,11 @@ public class Libro {
     }
 
     @Override
-	public String toString() {
-		return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", editorial=" + editorial + ", numPaginas="
-				+ numPaginas + ", edicion=" + edicion + ", idioma=" + idioma + ", fechaPublicacion=" + fechaPublicacion
-				+ ", descripcion=" + descripcion + ", tipoPasta=" + tipoPasta + ", isbn=" + isbn + ", numEjemplares="
-				+ numEjemplares + ", portada=" + portada + ", presentacion=" + presentacion + ", precio=" + precio
-				+ ", categoria=" + categoria + ", autor=" + autor + "]";
-	}
+    public String toString() {
+        return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", editorial=" + editorial + ", numPaginas="
+                + numPaginas + ", edicion=" + edicion + ", idioma=" + idioma + ", fechaPublicacion=" + fechaPublicacion
+                + ", descripcion=" + descripcion + ", tipoPasta=" + tipoPasta + ", isbn=" + isbn + ", numEjemplares="
+                + numEjemplares + ", portada=" + portada + ", presentacion=" + presentacion + ", precio=" + precio
+                + ", categoria=" + categoria + ", autor=" + autor + "]";
+    }
 }

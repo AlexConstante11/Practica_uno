@@ -1,5 +1,7 @@
 package com.distribuida.entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -29,6 +31,9 @@ public class Cliente {
     @Column(name = "correo")
     private String correo;
 
+    
+    
+    //Constructores
     public Cliente() {}
 
     public Cliente(int idCliente, String cedula, String nombre, String apellido, String direccion, String telefono,
